@@ -1,4 +1,4 @@
-### Clean Todo App
+### Things Todo App
 A simple todo web app made using `Flask`. Project idea credit to a post in [Bits and Pieces](https://blog.bitsrc.io/15-app-ideas-to-build-and-level-up-your-coding-skills-28612c72a3b1)
 by Florin Pop - see his github repo of project ideas [here](https://github.com/florinpop17/app-ideas)  
 I will use the user stories and bonus features suggested there first, then add more features as 
