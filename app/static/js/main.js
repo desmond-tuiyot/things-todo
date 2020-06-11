@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     $(".todo-input").keypress(function(e){
         let pressedKey = e.which || e.keyCode;
         if (pressedKey===13){
@@ -20,4 +19,8 @@ $(document).ready(function(){
             }
         }
     });
-})
+
+    $(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
+       $(this).parent().remove();
+    });
+});
