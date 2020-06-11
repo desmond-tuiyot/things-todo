@@ -1,11 +1,9 @@
-from flask import Flask
+from flask import render_template
 from app import app
 
+
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
-@app.route('/<name>')
-def hello_name(name):
-    return 'Hello {}'.format(name)
+@app.route('/index')
+def home():
+    user = {'username': 'Desmond'}
+    return render_template('todo_layout.html', title='Home', user=user)
