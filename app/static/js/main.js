@@ -7,17 +7,17 @@ $(".todo-input").keypress(function(e){
         if (nextTask===""){
             return false;
         } else {
-            let taskHTML = "<li class=\"list-group-item todo-task todo-active\">\n" +
-                "                    <div class=\"row justify-content-between no-gutters\">\n" +
-                "                        <div class=\"col-md-auto\">\n" +
-                "                        <label class=\"todo-label\">\n" +
-                "                            <input type=\"checkbox\" class=\"todo-checkbox\">\n" +
-                "                            <span>" +nextTask+ "</span>" +
-                "                        </label>\n" +
-                "                         </div>\n" +
-                "                        <div class=\"col-sm-2\">\n" +
-                "                        <button class=\"todo-edit-btn\"><i class=\"fas fa-edit\"></i></button>\n" +
-                "                        <button class=\"todo-quit\"><i class=\"fa fa-minus-circle\"></i></button>\n" +
+            let taskHTML = "<li class=\"list-group-item todo-task todo-active p-1\">\n" +
+                "                    <div class=\"p-2 row justify-content-between align-items-center no-gutters\">\n" +
+                "                        <div class=\"col\">\n" +
+                "                            <label class=\"todo-label\">\n" +
+                "                                <input type=\"checkbox\" class=\"todo-checkbox\">\n" +
+                "                                <p class=\"todo-text\">"+ nextTask +"</p>\n" +
+                "                            </label>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"col-2\">\n" +
+                "                            <button class=\"todo-edit-btn\"><i class=\"fas fa-edit\"></i></button>\n" +
+                "                            <button class=\"todo-quit\"><i class=\"fa fa-minus-circle\"></i></button>\n" +
                 "                        </div>\n" +
                 "                    </div>\n" +
                 "                </li>"
@@ -37,10 +37,10 @@ $(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
 $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
 
     if (this.checked){
-        $(this).parent().find("span").addClass("todo-done");
+        $(this).parent().find("p").addClass("todo-done");
         $(this).parent().parent().parent().parent().addClass("list-group-item-light todo-completed").removeClass("todo-active");
     }else {
-        $(this).parent().find("span").removeClass("todo-done");
+        $(this).parent().find("p").removeClass("todo-done");
         $(this).parent().parent().parent().parent().addClass("todo-active").removeClass("list-group-item-light todo-completed");
     }
 
@@ -51,12 +51,12 @@ $(".todo-task-list").on("click", ".todo-task .todo-edit-btn", function(){
     let taskParent = $(this).parent().parent();
     taskParent.find(".todo-checkbox").prop("disabled", true);
     taskParent.find(".todo-edit-btn").prop("disabled", true);
-    let spanText = taskParent.find("span").text();
-    taskParent.find("span").hide();
+    let pText = taskParent.find("p").text();
+    taskParent.find("p").hide();
     taskParent.find(".todo-checkbox").after("<input type=\"text\" " +
-                                                    "class=\"todo-edit text-secondary\" " +
+                                                    "class=\"todo-text todo-edit text-secondary\" " +
                                                     " autofocus >")
-    taskParent.find(".todo-edit").focus().val(spanText);
+    taskParent.find(".todo-edit").focus().val(pText);
 });
 
 
@@ -66,7 +66,13 @@ $(".todo-task-list").on("keypress focusout", ".todo-task .todo-edit", function(e
     if (pressedKey===13 || e.type === "focusout"){
         let taskParent = $(this).parent().parent().parent().parent();
         let editValue = $(this).val();
-        taskParent.find("span").text(editValue).show();
+
+        if (editValue===""){
+            taskParent.remove();
+        return false;
+    }
+
+        taskParent.find("p").text(editValue).show();
         $(this).remove();
         taskParent.find(".todo-checkbox").prop("disabled", false);
         taskParent.find(".todo-edit-btn").prop("disabled", false);

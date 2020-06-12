@@ -1,23 +1,16 @@
 body {
-    font-size: 14px;
+    font-size: 16px;
     width: 480px;
     alignment: center;
-    /*color: rgb(246, 248, 255);*/
     color: black;
 }
 
+/* set width for main div */
 .todo-main {
     width: 100%;
-    /*text-align: center;*/
 }
 
-.todo-quit, .todo-edit-btn{
-    padding: 0;
-    border: none;
-    background: none;
-    outline: 0 solid transparent;
-}
-
+/* header and input prompt div styling */
 .todo-main .todo-header{
     padding:8px;
     margin: 0;
@@ -32,44 +25,41 @@ body {
     border: none;
 }
 
-.todo-task-alt {
-    list-style-type: none;
-}
-
-.input-group {
-    line-height: 40px;
-}
-
-.todo-edit {
-    outline: 0px solid transparent;
-    border: 0 solid transparent;
-}
+/* Label, text input, and paragraph text */
 
 .todo-label {
-    /*display: inline-flex;*/
     cursor: pointer;
     display: inline-block;
-    /*position: relative;*/
+    width: 100%;
+    height: 100%;
 
 }
 
-.todo-label > span {
-    padding: 0.5rem 0.25rem;
+.todo-label .todo-text {
+    /*padding: 0.5rem 0.25rem;*/
     vertical-align: middle;
+    display: inline-block;
+    padding: 4px;
+    width: 90%;
+    height: 100%;
+    text-align: left;
+    margin-bottom: 0;
 }
-.todo-label > p {
-    padding: 0.5rem 0.25rem;
+
+.todo-label .todo-checkbox {
     vertical-align: middle;
+    margin-right: 10px;
 }
 
-.todo-done {
-    text-decoration: line-through;
-}
-
-[contenteditable] {
+/* edit and quit buttons styling */
+.todo-quit, .todo-edit-btn{
+    padding: 0;
+    border: none;
+    background: none;
     outline: 0 solid transparent;
 }
 
+/* need to fix this one and the next */
 .todo-button-group button{
     outline: 0 solid transparent;
     border: 0 solid transparent;
@@ -81,14 +71,14 @@ body {
     background: transparent;
 }
 
-.todo-text {
-    display: inline-block;
-    max-width: 90%;
-    text-align: left;
-    margin-bottom: 0;
+/* to be used in jquery  */
+.todo-done {
+    text-decoration: line-through;
 }
 
-.todo-checkbox {
-    vertical-align: middle;
-    margin-right: 10px;
+
+.todo-edit {
+    outline: 0 solid transparent;
+    border: 0 solid transparent;
 }
+
