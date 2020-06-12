@@ -7,7 +7,7 @@ $(".todo-input").keypress(function(e){
         if (nextTask===""){
             return false;
         } else {
-            let taskHTML = "<li class=\"list-group-item todo-task\">\n" +
+            let taskHTML = "<li class=\"list-group-item todo-task todo-active\">\n" +
                             "<label class=\"todo-label\">\n" +
                             "<input type=\"checkbox\" class=\"todo-checkbox\">\n" +
                             "<span>" +nextTask+ "</span>" +
@@ -32,10 +32,10 @@ $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
 
     if (this.checked){
         $(this).parent().find("span").addClass("todo-done");
-        $(this).parent().parent().addClass("list-group-item-light");
+        $(this).parent().parent().addClass("list-group-item-light todo-completed").removeClass("todo-active");
     }else {
         $(this).parent().find("span").removeClass("todo-done");
-        $(this).parent().parent().removeClass("list-group-item-light");
+        $(this).parent().parent().addClass("todo-active").removeClass("list-group-item-light todo-completed");
     }
 
 });
@@ -66,4 +66,19 @@ $(".todo-task-list").on("keypress focusout", ".todo-task .todo-edit", function(e
         taskParent.find(".todo-edit-btn").prop("disabled", false);
         return true;
     }
+});
+
+// function to view all, completed, or active tasks
+$("#todo-show-all").click(function(){
+    $(".todo-task").prop("hidden", false);
+});
+
+$("#todo-show-active").click(function(){
+    $(".todo-completed").prop("hidden", true)
+    $(".todo-active").prop("hidden", false)
+});
+
+$("#todo-show-completed").click(function(){
+    $(".todo-completed").prop("hidden", false);
+    $(".todo-active").prop("hidden", true);
 });

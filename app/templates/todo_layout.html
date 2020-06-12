@@ -21,17 +21,36 @@
         <h3 class="todo-header text-center">Things To-Do</h3>
         {#        <label for="task_input">Enter a  task</label>#}
         <input type="text" class="todo-input" placeholder="Enter a task here and press Enter...">
-        <div class="todo-content">
-        <ul class="list-group todo-task-list">
-            <li class="list-group-item todo-task">
-                <label class="todo-label">
-                    <input type="checkbox" class="todo-checkbox">
-                    <span>Do this thing here</span>
-                </label>
-                <button class="todo-edit-btn"><i class="fas fa-edit"></i></button>
-                <button class="todo-quit"><i class="fa fa-minus-circle"></i></button>
-            </li>
-        </ul>
+        <div class="todo-content text-center">
+            <ul class="list-group todo-task-list">
+                <li class="list-group-item todo-task todo-active">
+                    <label class="todo-label">
+                        <input type="checkbox" class="todo-checkbox">
+                        <span>Do this thing here</span>
+                    </label>
+                    <button class="todo-edit-btn"><i class="fas fa-edit"></i></button>
+                    <button class="todo-quit"><i class="fa fa-minus-circle"></i></button>
+                </li>
+                <li class="list-group-item todo-task todo-active">
+                    <div class="row justify-content-between no-gutters">
+                        <div class="col-md-auto">
+                        <label class="todo-label">
+                            <input type="checkbox" class="todo-checkbox">
+                            <span>Do this thing here</span>
+                        </label>
+                         </div>
+                        <div class="col-sm-2">
+                        <button class="todo-edit-btn"><i class="fas fa-edit"></i></button>
+                        <button class="todo-quit"><i class="fa fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="btn-group btn-group-sm todo-button-group" role="group" aria-label="todo-list-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="todo-show-all">All</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="todo-show-active">Active</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="todo-show-completed">Completed</button>
+            </div>
         </div>
         <!-- Optional JavaScript -->
         <!-- Custom Script -->

@@ -5,6 +5,12 @@ body {
     /*color: rgb(246, 248, 255);*/
     color: black;
 }
+
+.todo-main {
+    width: 100%;
+    /*text-align: center;*/
+}
+
 .todo-quit, .todo-edit-btn{
     padding: 0;
     border: none;
@@ -55,5 +61,16 @@ body {
 }
 
 [contenteditable] {
-    outline: 0px solid transparent;
+    outline: 0 solid transparent;
+}
+
+.todo-button-group button{
+    outline: 0 solid transparent;
+    border: 0 solid transparent;
+}
+
+.todo-button-group button:focus{
+    /*outline: 0 solid transparent;*/
+    border: 0 solid transparent;
+    background: transparent;
 }
