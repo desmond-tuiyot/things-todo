@@ -1,3 +1,4 @@
+// function to append new task to list
 $(".todo-input").keypress(function(e){
     let pressedKey = e.which || e.keyCode;
     if (pressedKey===13){
@@ -11,6 +12,7 @@ $(".todo-input").keypress(function(e){
                             "<input type=\"checkbox\" class=\"todo-checkbox\">\n" +
                             "<span>" +nextTask+ "</span>" +
                             "</label>\n" +
+                            "<button class=\"todo-edit-btn\"><i class=\"fas fa-edit\"></i></button>\n" +
                             "<button class=\"todo-quit\"><i class=\"fa fa-minus-circle\"></i></button>\n" +
                             "</li>";
             $(".todo-task-list").append(taskHTML);
@@ -20,10 +22,12 @@ $(".todo-input").keypress(function(e){
     }
 });
 
+// function to remove tasks from list
 $(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
    $(this).parent().remove();
 });
 
+// function to mark tasks as complete/unmark them
 $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
 
     if (this.checked){
@@ -34,4 +38,32 @@ $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
         $(this).parent().parent().removeClass("list-group-item-light");
     }
 
+});
+
+// function to edit tasks
+$(".todo-task-list").on("click", ".todo-task .todo-edit-btn", function(){
+    let taskParent = $(this).parent();
+    taskParent.find(".todo-checkbox").prop("disabled", true);
+    taskParent.find(".todo-edit-btn").prop("disabled", true);
+    let spanText = taskParent.find("span").text();
+    taskParent.find("span").hide();
+    taskParent.find(".todo-checkbox").after("<input type=\"text\" " +
+                                                    "class=\"todo-edit text-secondary\" " +
+                                                    " autofocus >")
+    taskParent.find(".todo-edit").focus().val(spanText);
+});
+
+
+// function to set make edit permanent
+$(".todo-task-list").on("keypress focusout", ".todo-task .todo-edit", function(e){
+    let pressedKey = e.which || e.keyCode;
+    if (pressedKey===13 || e.type === "focusout"){
+        let taskParent = $(this).parent().parent();
+        let editValue = $(this).val();
+        taskParent.find("span").text(editValue).show();
+        $(this).remove();
+        taskParent.find(".todo-checkbox").prop("disabled", false);
+        taskParent.find(".todo-edit-btn").prop("disabled", false);
+        return true;
+    }
 });

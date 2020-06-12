@@ -13,7 +13,7 @@ inspiration strikes or as the need arises.
 * ~~User can remove a to-do item by pressing on a button (or on the to-do item itself)~~
 
 #### Bonus Features
-* User can edit a to-do
+* ~~User can edit a to-do~~
 * User can see a list with all the completed to-do’s
 * User can see a list with all the active to-do’s
 * User can see the date when he created the to-do

@@ -5,14 +5,11 @@ body {
     /*color: rgb(246, 248, 255);*/
     color: black;
 }
-.todo-quit{
+.todo-quit, .todo-edit-btn{
     padding: 0;
     border: none;
     background: none;
-}
-
-.todo-main {
-
+    outline: 0 solid transparent;
 }
 
 .todo-main .todo-header{
@@ -26,13 +23,20 @@ body {
     line-height: 32px;
     padding: 8px;
     margin: 0;
-    /*border: none;*/
+    border: none;
 }
 
-.todo-content li {
+.todo-task-alt {
+    list-style-type: none;
 }
 
-.todo-content .todo-quit {
+.input-group {
+    line-height: 40px;
+}
+
+.todo-edit {
+    outline: 0px solid transparent;
+    border: 0 solid transparent;
 }
 
 .todo-label {
@@ -48,4 +52,8 @@ body {
 
 .todo-done {
     text-decoration: line-through;
+}
+
+[contenteditable] {
+    outline: 0px solid transparent;
 }
