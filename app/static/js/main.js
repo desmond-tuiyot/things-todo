@@ -34,6 +34,4 @@ $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
         $(this).parent().parent().removeClass("list-group-item-light");
     }
 
-
-
 });
