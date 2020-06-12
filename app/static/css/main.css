@@ -25,7 +25,7 @@ body {
     border: none;
 }
 
-/* Label, text input, and paragraph text */
+/* Label, text input, and paragraph text, and date */
 
 .todo-label {
     cursor: pointer;
@@ -49,6 +49,11 @@ body {
 .todo-label .todo-checkbox {
     vertical-align: middle;
     margin-right: 10px;
+}
+
+#date-created {
+    margin-top: -10px;
+    margin-left: 44px;
 }
 
 /* edit and quit buttons styling */

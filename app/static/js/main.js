@@ -7,6 +7,8 @@ $(".todo-input").keypress(function(e){
         if (nextTask===""){
             return false;
         } else {
+            let dt = new Date();
+            let currentDate = "Created: " + dt.toLocaleDateString();
             let taskHTML = "<li class=\"list-group-item todo-task todo-active p-1\">\n" +
                 "                    <div class=\"p-2 row justify-content-between align-items-center no-gutters\">\n" +
                 "                        <div class=\"col\">\n" +
@@ -20,12 +22,17 @@ $(".todo-input").keypress(function(e){
                 "                            <button class=\"todo-quit\"><i class=\"fa fa-minus-circle\"></i></button>\n" +
                 "                        </div>\n" +
                 "                    </div>\n" +
+                "                    <p id=\"date-created\" class=\"small text-left text-secondary\">"+ currentDate +"</p>\n"+
                 "                </li>"
             $(".todo-task-list").append(taskHTML);
-            $(this).val("")
+            $(this).val("");
+            // add current date
+
+
             return true;
         }
     }
+
 });
 
 // function to remove tasks from list
@@ -37,10 +44,10 @@ $(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
 $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
 
     if (this.checked){
-        $(this).parent().find("p").addClass("todo-done");
+        $(this).parent().find(".todo-text").addClass("todo-done");
         $(this).parent().parent().parent().parent().addClass("list-group-item-light todo-completed").removeClass("todo-active");
     }else {
-        $(this).parent().find("p").removeClass("todo-done");
+        $(this).parent().find(".todo-text").removeClass("todo-done");
         $(this).parent().parent().parent().parent().addClass("todo-active").removeClass("list-group-item-light todo-completed");
     }
 
@@ -51,7 +58,7 @@ $(".todo-task-list").on("click", ".todo-task .todo-edit-btn", function(){
     let taskParent = $(this).parent().parent();
     taskParent.find(".todo-checkbox").prop("disabled", true);
     taskParent.find(".todo-edit-btn").prop("disabled", true);
-    let pText = taskParent.find("p").text();
+    let pText = taskParent.find(".todo-text").text();
     taskParent.find("p").hide();
     taskParent.find(".todo-checkbox").after("<input type=\"text\" " +
                                                     "class=\"todo-text todo-edit text-secondary\" " +
@@ -72,7 +79,7 @@ $(".todo-task-list").on("keypress focusout", ".todo-task .todo-edit", function(e
         return false;
     }
 
-        taskParent.find("p").text(editValue).show();
+        taskParent.find(".todo-text").text(editValue).show();
         $(this).remove();
         taskParent.find(".todo-checkbox").prop("disabled", false);
         taskParent.find(".todo-edit-btn").prop("disabled", false);
@@ -94,3 +101,7 @@ $("#todo-show-completed").click(function(){
     $(".todo-completed").prop("hidden", false);
     $(".todo-active").prop("hidden", true);
 });
+
+// add current date
+let dt = new Date();
+$("#date-created").text("Created: " + dt.toLocaleDateString());
