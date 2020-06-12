@@ -4,7 +4,7 @@ by Florin Pop - see his github repo of project ideas [here](https://github.com/f
 I will use the user stories and bonus features suggested there first, then add more features as 
 inspiration strikes or as the need arises.
 
-**[Go to app](https://dtuiyot-todo-stage.herokuapp.com/)** 
+**[Go to app](https://dtuiyot-todo-pro.herokuapp.com/)** 
 
 #### User Stories
 * ~~User can see an input field where he can type in a to-do item~~
