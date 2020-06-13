@@ -46,13 +46,15 @@ $(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
 
 // function to mark tasks as complete/unmark them
 $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
-
+    let taskParent = $(this).parent().parent().parent().parent();
     if (this.checked){
         $(this).parent().find(".todo-text").addClass("todo-done");
-        $(this).parent().parent().parent().parent().addClass("list-group-item-light todo-completed").removeClass("todo-active");
+        taskParent.addClass("list-group-item-light todo-completed").removeClass("todo-active");
+        editTasks(taskParent.attr("id"), true);
     }else {
         $(this).parent().find(".todo-text").removeClass("todo-done");
-        $(this).parent().parent().parent().parent().addClass("todo-active").removeClass("list-group-item-light todo-completed");
+        taskParent.addClass("todo-active").removeClass("list-group-item-light todo-completed");
+        editTasks(taskParent.attr("id"), false);
     }
 
 });
@@ -82,11 +84,17 @@ $(".todo-task-list").on("keypress focusout", ".todo-task .todo-edit", function(e
             taskParent.remove();
         return false;
     }
-
+        // show the previously hidden text, now updated with new text
         taskParent.find(".todo-text").text(editValue).show();
         $(this).remove();
+
+        // update task data in local storage
+        editTasks(taskParent.attr("id"), editValue);
+
+        // enable the buttons again
         taskParent.find(".todo-checkbox").prop("disabled", false);
         taskParent.find(".todo-edit-btn").prop("disabled", false);
+
         return true;
     }
 });
@@ -120,7 +128,8 @@ let storeTasks = function(todoTask, date){
     // create a JSON object to hold the task and date of task currently being added
     let todoData = {
         task: todoTask,
-        date: date.toLocaleDateString()
+        date: date.toLocaleDateString(),
+        done: false
     };
     // store the key-value pair in localStorage
     window.localStorage.setItem(key, JSON.stringify(todoData));
@@ -151,6 +160,19 @@ let removeTasks = function(key){
     window.localStorage.setItem('order', JSON.stringify(new_order));
 }
 
+// function to edit task details or to mark as completed
+let editTasks = function(key, taskDetails){
+    // get the corresponding task data
+    let taskData = JSON.parse(window.localStorage.getItem(key));
+
+    // could be a task being edited or being marked as complete
+    if (typeof(taskDetails)==='string'){
+        taskData.task = taskDetails;
+    }else{
+        taskData.done = taskDetails;
+    }
+    window.localStorage.setItem(key, JSON.stringify(taskData));
+}
 
 // add current date
 let dt = new Date();
