@@ -9,7 +9,7 @@ $(".todo-input").keypress(function(e){
         } else {
             let dt = new Date();
             let currentDate = "Created: " + dt.toLocaleDateString();
-            let key = storeData(nextTask, dt);
+            let key = storeTasks(nextTask, dt);
             // alert(key);
             let taskHTML = "<li class=\"list-group-item todo-task todo-active p-1\" id=\""+ key +"\">\n" +
                 "                    <div class=\"p-2 row justify-content-between align-items-center no-gutters\">\n" +
@@ -38,7 +38,10 @@ $(".todo-input").keypress(function(e){
 
 // function to remove tasks from list
 $(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
-   $(this).parent().parent().parent().remove();
+   let li = $(this).parent().parent().parent();
+   alert(li.attr("id"));
+   removeTasks(li.attr("id"));
+   li.remove();
 });
 
 // function to mark tasks as complete/unmark them
@@ -104,7 +107,7 @@ $("#todo-show-completed").click(function(){
 });
 
 // function to store data in localStorage
-let storeData = function(todoTask, date){
+let storeTasks = function(todoTask, date){
     let order = localStorage.getItem('order');
     // creates an array if its not in already
     order = order === null ? Array() : JSON.parse(order);
@@ -126,19 +129,26 @@ let storeData = function(todoTask, date){
     order.push(key);
     // store that in local storage
     window.localStorage.setItem('order', JSON.stringify(order))
-    alert(window.localStorage.getItem('order'));
-    alert(window.localStorage.getItem(key))
     return key;
 }
 
 // function to remove stored data from localStorage
-let removeData = function(todoTask, dateCreated){
-    let todoData = {
-        task: todoTask,
-        date: date.toLocaleDateString()
-    };
+let removeTasks = function(key){
+    // remove data associated with key
+    localStorage.removeItem(key);
 
-    window.localStorage.setItem(date.toLocaleString(), JSON.stringify(todoData));
+    // remove key from order array
+    let order = JSON.parse(window.localStorage.getItem('order'));
+    if (order === null) {
+        return;
+    }
+    let new_order = [];
+    for (let i=0; i<order.length; i++){
+        if (order[i] !== key){
+            new_order.push(order[i]);
+        }
+    }
+    window.localStorage.setItem('order', JSON.stringify(new_order));
 }
 
 
