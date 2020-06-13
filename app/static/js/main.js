@@ -9,7 +9,9 @@ $(".todo-input").keypress(function(e){
         } else {
             let dt = new Date();
             let currentDate = "Created: " + dt.toLocaleDateString();
-            let taskHTML = "<li class=\"list-group-item todo-task todo-active p-1\">\n" +
+            let key = storeData(nextTask, dt);
+            // alert(key);
+            let taskHTML = "<li class=\"list-group-item todo-task todo-active p-1\" id=\""+ key +"\">\n" +
                 "                    <div class=\"p-2 row justify-content-between align-items-center no-gutters\">\n" +
                 "                        <div class=\"col\">\n" +
                 "                            <label class=\"todo-label\">\n" +
@@ -27,7 +29,6 @@ $(".todo-input").keypress(function(e){
             $(".todo-task-list").append(taskHTML);
             $(this).val("");
             // add current date
-
 
             return true;
         }
@@ -102,6 +103,45 @@ $("#todo-show-completed").click(function(){
     $(".todo-active").prop("hidden", true);
 });
 
+// function to store data in localStorage
+let storeData = function(todoTask, date){
+    let order = localStorage.getItem('order');
+    // creates an array if its not in already
+    order = order === null ? Array() : JSON.parse(order);
+
+    // create a random value to act as key in localStorage and as id in li element
+    let key = date.valueOf().toString() + Math.random().toString();
+    while (order.includes(key)){
+        key = date.valueOf().toString() + Math.random().toString();
+    }
+    // create a JSON object to hold the task and date of task currently being added
+    let todoData = {
+        task: todoTask,
+        date: date.toLocaleDateString()
+    };
+    // store the key-value pair in localStorage
+    window.localStorage.setItem(key, JSON.stringify(todoData));
+
+    // append the key to order array
+    order.push(key);
+    // store that in local storage
+    window.localStorage.setItem('order', JSON.stringify(order))
+    alert(window.localStorage.getItem('order'));
+    alert(window.localStorage.getItem(key))
+    return key;
+}
+
+// function to remove stored data from localStorage
+let removeData = function(todoTask, dateCreated){
+    let todoData = {
+        task: todoTask,
+        date: date.toLocaleDateString()
+    };
+
+    window.localStorage.setItem(date.toLocaleString(), JSON.stringify(todoData));
+}
+
+
 // add current date
 let dt = new Date();
-$("#date-created").text("Created: " + dt.toLocaleDateString());
+$("#date-created").text("Created: " + dt.toLocaleString());
