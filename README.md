@@ -18,3 +18,6 @@ inspiration strikes or as the need arises.
 * ~~User can see a list with all the active to-do’s~~
 * ~~User can see the date when he created the to-do~~
 * ~~When closing the browser window the to-do’s will be stored and when the User returns, the data will be retrieved~~
+
+#### Bonus bonus features
+* User can choose to have the remind sent to their phone
