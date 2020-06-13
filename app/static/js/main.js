@@ -1,4 +1,53 @@
-// function to append new task to list
+let todo_task_list = $(".todo-task-list");
+
+// function to task li element
+let constructTaskLi = function (task, dateCreated, id, done) {
+    // these clases are dependent on whether the task was completed or no
+    let todo_text_class = "";
+    let todo_task_class = "";
+    let checked = "";
+    if (done){
+        todo_text_class = "todo-done";
+        todo_task_class = "list-group-item-light todo-completed";
+        checked = "checked";
+    } else{
+        todo_task_class = "todo-active";
+    }
+
+    return "<li class=\"list-group-item todo-task " + todo_task_class + " p-1\" id=\"" + id + "\">\n" +
+        "                    <div class=\"p-2 row justify-content-between align-items-center no-gutters\">\n" +
+        "                        <div class=\"col\">\n" +
+        "                            <label class=\"todo-label\">\n" +
+        "                                <input type=\"checkbox\" "+ checked +" class=\"todo-checkbox\">\n" +
+        "                                <p class=\"todo-text "+ todo_text_class +" \">" + task + "</p>\n" +
+        "                            </label>\n" +
+        "                        </div>\n" +
+        "                        <div class=\"col-2\">\n" +
+        "                            <button class=\"todo-edit-btn\"><i class=\"fas fa-edit\"></i></button>\n" +
+        "                            <button class=\"todo-quit\"><i class=\"fa fa-minus-circle\"></i></button>\n" +
+        "                        </div>\n" +
+        "                    </div>\n" +
+        "                    <p id=\"date-created\" class=\"small text-left text-secondary\">Created: " + dateCreated + "</p>\n" +
+        "                </li>"
+}
+
+// function to append existing localstorage tasks the list
+let populateTaskList = function(){
+    let order = JSON.parse(localStorage.getItem("order"));
+    if (order === null){
+        return
+    }
+    for (let i=0; i<order.length; i++){
+        let key = order[i];
+        let task = JSON.parse(localStorage.getItem(key));
+        let li_html = constructTaskLi(task.task, task.date, key, task.done);
+        todo_task_list.append(li_html);
+    }
+}
+
+populateTaskList();
+
+// function to append new task to list on click
 $(".todo-input").keypress(function(e){
     let pressedKey = e.which || e.keyCode;
     if (pressedKey===13){
@@ -8,28 +57,11 @@ $(".todo-input").keypress(function(e){
             return false;
         } else {
             let dt = new Date();
-            let currentDate = "Created: " + dt.toLocaleDateString();
+            let currentDate = dt.toLocaleString();
             let key = storeTasks(nextTask, dt);
-            // alert(key);
-            let taskHTML = "<li class=\"list-group-item todo-task todo-active p-1\" id=\""+ key +"\">\n" +
-                "                    <div class=\"p-2 row justify-content-between align-items-center no-gutters\">\n" +
-                "                        <div class=\"col\">\n" +
-                "                            <label class=\"todo-label\">\n" +
-                "                                <input type=\"checkbox\" class=\"todo-checkbox\">\n" +
-                "                                <p class=\"todo-text\">"+ nextTask +"</p>\n" +
-                "                            </label>\n" +
-                "                        </div>\n" +
-                "                        <div class=\"col-2\">\n" +
-                "                            <button class=\"todo-edit-btn\"><i class=\"fas fa-edit\"></i></button>\n" +
-                "                            <button class=\"todo-quit\"><i class=\"fa fa-minus-circle\"></i></button>\n" +
-                "                        </div>\n" +
-                "                    </div>\n" +
-                "                    <p id=\"date-created\" class=\"small text-left text-secondary\">"+ currentDate +"</p>\n"+
-                "                </li>"
-            $(".todo-task-list").append(taskHTML);
+            let taskHTML = constructTaskLi(nextTask, currentDate, key, false);
+            todo_task_list.append(taskHTML);
             $(this).val("");
-            // add current date
-
             return true;
         }
     }
@@ -37,15 +69,14 @@ $(".todo-input").keypress(function(e){
 });
 
 // function to remove tasks from list
-$(".todo-task-list").on("click", ".todo-task .todo-quit", function(){
+todo_task_list.on("click", ".todo-task .todo-quit", function(){
    let li = $(this).parent().parent().parent();
-   alert(li.attr("id"));
    removeTasks(li.attr("id"));
    li.remove();
 });
 
 // function to mark tasks as complete/unmark them
-$(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
+todo_task_list.on("click", ".todo-task .todo-checkbox", function(){
     let taskParent = $(this).parent().parent().parent().parent();
     if (this.checked){
         $(this).parent().find(".todo-text").addClass("todo-done");
@@ -60,7 +91,7 @@ $(".todo-task-list").on("click", ".todo-task .todo-checkbox", function(){
 });
 
 // function to edit tasks
-$(".todo-task-list").on("click", ".todo-task .todo-edit-btn", function(){
+todo_task_list.on("click", ".todo-task .todo-edit-btn", function(){
     let taskParent = $(this).parent().parent();
     taskParent.find(".todo-checkbox").prop("disabled", true);
     taskParent.find(".todo-edit-btn").prop("disabled", true);
@@ -72,9 +103,8 @@ $(".todo-task-list").on("click", ".todo-task .todo-edit-btn", function(){
     taskParent.find(".todo-edit").focus().val(pText);
 });
 
-
 // function to set make edit permanent
-$(".todo-task-list").on("keypress focusout", ".todo-task .todo-edit", function(e){
+todo_task_list.on("keypress focusout", ".todo-task .todo-edit", function(e){
     let pressedKey = e.which || e.keyCode;
     if (pressedKey===13 || e.type === "focusout"){
         let taskParent = $(this).parent().parent().parent().parent();
@@ -128,7 +158,7 @@ let storeTasks = function(todoTask, date){
     // create a JSON object to hold the task and date of task currently being added
     let todoData = {
         task: todoTask,
-        date: date.toLocaleDateString(),
+        date: date.toLocaleString(),
         done: false
     };
     // store the key-value pair in localStorage
