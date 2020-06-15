@@ -7,7 +7,7 @@ let constructTaskLi = function (task, dateCreated, id, done) {
     let todo_task_class = "";
     let checked = "";
     if (done){
-        todo_text_class = "todo-done";
+        todo_text_class = "text-secondary todo-done";
         todo_task_class = "list-group-item-light todo-completed";
         checked = "checked";
     } else{
@@ -79,11 +79,11 @@ todo_task_list.on("click", ".todo-task .todo-quit", function(){
 todo_task_list.on("click", ".todo-task .todo-checkbox", function(){
     let taskParent = $(this).parent().parent().parent().parent();
     if (this.checked){
-        $(this).parent().find(".todo-text").addClass("todo-done");
+        $(this).parent().find(".todo-text").addClass("text-secondary todo-done");
         taskParent.addClass("list-group-item-light todo-completed").removeClass("todo-active");
         editTasks(taskParent.attr("id"), true);
     }else {
-        $(this).parent().find(".todo-text").removeClass("todo-done");
+        $(this).parent().find(".todo-text").removeClass("text-secondary todo-done");
         taskParent.addClass("todo-active").removeClass("list-group-item-light todo-completed");
         editTasks(taskParent.attr("id"), false);
     }

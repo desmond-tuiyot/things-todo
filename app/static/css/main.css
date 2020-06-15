@@ -1,30 +1,60 @@
 body {
-    font-size: 16px;
-    width: 480px;
+    font-size: 18px;
     alignment: center;
-    color: black;
+    background: #0b0c10;
 }
 
 /* set width for main div */
 .todo-main {
-    width: 100%;
+    /*width: 100%;*/
+    width: 540px;
+    font-family: Cambria;
+    /*margin-top: 20px;*/
 }
 
 /* header and input prompt div styling */
 .todo-main .todo-header{
     padding:8px;
-    margin: 0;
-    background: rgb(246, 247, 235);
+    margin-top: 100px;
+    color: #45a29e;
+    opacity: 50%;
+    font-family: inherit;
+    font-size: 80px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 400;
+    /*line-height: 80px;*/
 }
 
 .todo-main .todo-input {
     width: 100%;
     line-height: 32px;
+    border: #c5c6c7 1px solid;
+    border-radius: 4px;
     padding: 8px;
     margin: 0;
-    border: none;
+    color: #66fcf1;
+    background: #0b0c10;
+    font-family: inherit;
 }
 
+.todo-main .todo-input:focus {
+    outline: 0 solid transparent;
+    border: #c5c6c7 1px solid;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.todo-task {
+    background: #0b0c10;
+    color: white;
+    border-bottom: #66fcf1 1px solid;
+    font-family: inherit;
+}
+
+.fa, .fas {
+    color: white;
+}
 /* Label, text input, and paragraph text, and date */
 
 .todo-label {
@@ -47,8 +77,22 @@ body {
 }
 
 .todo-label .todo-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    border: white 1px solid;
+    border-radius: 12px;
+    outline: 0 solid transparent;
     vertical-align: middle;
     margin-right: 10px;
+}
+
+.todo-label .todo-checkbox:checked {
+    background: #292b2c;
+    border: 0 solid transparent;
+    /*backgrou : 50%;*/
 }
 
 #date-created {
@@ -68,22 +112,35 @@ body {
 .todo-button-group button{
     outline: 0 solid transparent;
     border: 0 solid transparent;
+    background: transparent;
+}
+
+.todo-button-group button:hover {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-bottom: #66fcf1 1px solid;
 }
 
 .todo-button-group button:focus{
     /*outline: 0 solid transparent;*/
-    border: 0 solid transparent;
-    background: transparent;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-bottom: #66fcf1 1px solid;
 }
 
 /* to be used in jquery  */
 .todo-done {
     text-decoration: line-through;
+
 }
 
 
 .todo-edit {
     outline: 0 solid transparent;
     border: 0 solid transparent;
+    background: #0b0c10;
+    color: #66fcf1;
 }
 
