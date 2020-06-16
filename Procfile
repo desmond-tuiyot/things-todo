@@ -1,1 +1,1 @@
-web: gunicorn todo_app:app
+web: flask db upgrade; gunicorn todo_app:app
