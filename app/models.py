@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model):
@@ -9,20 +10,26 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True, nullable=False)  # index maximizes database search
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
-    todo_task = db.relationship('Task', backref='author', lazy='dynamic')
+    tasks = db.relationship('Task', backref='author', lazy='dynamic')
 
     def __repr__(self):
-        return '<User: {}> \n<Email: {}>'.format(self.username, self.email)
+        return '<User: {}> \n<Email: {}\n\n>'.format(self.username, self.email)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class Task(db.Model):
     __tablename__ = 'task'
 
     id = db.Column(db.Integer, primary_key=True)
-    task_details = db.Column(db.String(500))
+    task_details = db.Column(db.String(480))
     date_created = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<User: {}>\n<Task: {}>\n<Date Created: {}>'.format(self.author, self.task_details, self.date_created)
+        return '<User: {}>\n<Task: {}>\n<Date Created: {}\n>'.format(self.author, self.task_details, self.date_created)
 
