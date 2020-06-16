@@ -52,8 +52,20 @@ def register():
     return render_template("register.html", form=form)
 
 
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    tasks = [
+        {'author': user, 'task_details': 'do your laundry'},
+        {'author': user, 'task_details': 'make dinner'}
+    ]
+
+    return render_template('user.html', user=user, tasks=tasks)
+
 @app.route('/account')
 @login_required
 def account():
     flash("Pretend this is an account page")
     return redirect(url_for('home'))
+
