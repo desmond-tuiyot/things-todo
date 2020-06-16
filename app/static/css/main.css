@@ -5,6 +5,10 @@ body {
     font-family: Cambria;
 }
 
+form p, h1 {
+    color: white;
+    alignment: center;
+}
 /* set width for main div */
 .todo-main {
     /*width: 100%;*/
