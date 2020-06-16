@@ -26,8 +26,12 @@
           <div class="navbar-nav">
               <a class="nav-item nav-link active" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
               <a class="nav-item nav-link" href="#">Account</a>
-              <a class="nav-item nav-link" href="{{ url_for('login') }}">Log In</a>
-              <a class="nav-item nav-link" href="#">Settings</a>
+              {% if current_user.is_anonymous %}
+                  <a class="nav-item nav-link" href="{{ url_for('login') }}">Log In</a>
+              {% else %}
+                  <a class="nav-item nav-link" href="{{ url_for('logout') }}">Log Out</a>
+              {% endif %}
+                <a class="nav-item nav-link" href="#">Settings</a>
           </div>
       </div>
   </nav>

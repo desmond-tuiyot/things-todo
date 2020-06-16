@@ -2,7 +2,7 @@ from app import app
 from app.forms import LoginForm
 from app.models import User
 from flask import render_template, url_for, redirect, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 
 
 @app.route('/')
@@ -11,6 +11,7 @@ def home():
     return render_template('home.html')
 
 
+# dtuiyot - dtuiyot@gmail.com - password
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -24,3 +25,9 @@ def login():
         login_user(user, remember=form.remember.data)
         return redirect(url_for('home'))
     return render_template("login.html", form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
