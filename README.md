@@ -20,6 +20,6 @@ inspiration strikes or as the need arises.
 * ~~When closing the browser window the to-do’s will be stored and when the User returns, the data will be retrieved~~
 
 #### Bonus<sup>2</sup> features
-* User can create an account and log in
+* ~~User can create an account and log in~~
 * User can see their past reminders
 * User can choose to have the remind sent to their phone
