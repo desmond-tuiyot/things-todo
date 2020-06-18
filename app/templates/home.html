@@ -1,33 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-<main class="container todo-main mx-auto mt-5">
+    <div class="container todo-main mx-auto mt-5">
         <h1 class="todo-header text-center">Things To-Do</h1>
         {% if current_user.is_authenticated %}
-        <h2 class="text-primary text-center">Hi, {{ current_user.username }}</h2>
+            <h2 class="text-primary text-center">Hi, {{ current_user.username }}</h2>
         {% endif %}
         <input type="text" class="todo-input" placeholder="Enter a task here and press Enter...">
         <div class="todo-content text-center">
             <ul class="list-group todo-task-list">
-{#                <li class="list-group-item todo-task todo-active p-1">#}
-{#                    <div class="p-2 row justify-content-between align-items-center no-gutters">#}
-{#                        <div class="col">#}
-{#                            <label class="todo-label">#}
-{#                                <input type="checkbox" class="todo-checkbox">#}
-{#                                <p class="todo-text">Take out the laundry</p>#}
-{#                            </label>#}
-{#                        </div>#}
-{#                        <div class="col-2">#}
-{#                            <button class="todo-edit-btn"><i class="fas fa-edit"></i></button>#}
-{#                            <button class="todo-quit"><i class="fa fa-minus-circle"></i></button>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <p id="date-created" class="small text-left text-secondary"></p>#}
-{#                </li>#}
+                {#                <li class="list-group-item todo-task todo-active p-1">#}
+                {#                    <div class="p-2 row justify-content-between align-items-center no-gutters">#}
+                {#                        <div class="col">#}
+                {#                            <label class="todo-label">#}
+                {#                                <input type="checkbox" class="todo-checkbox">#}
+                {#                                <p class="todo-text">Take out the laundry</p>#}
+                {#                            </label>#}
+                {#                        </div>#}
+                {#                        <div class="col-2">#}
+                {#                            <button class="todo-edit-btn"><i class="fas fa-edit"></i></button>#}
+                {#                            <button class="todo-quit"><i class="fa fa-minus-circle"></i></button>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                    <p id="date-created" class="small text-left text-secondary"></p>#}
+                {#                </li>#}
             </ul>
             <div class="btn-group btn-group-sm todo-button-group" role="group" aria-label="todo-list-group">
-              <button type="button" class="text-secondary" id="todo-show-all">All</button>
-              <button type="button" class="text-secondary" id="todo-show-active">Active</button>
-              <button type="button" class="text-secondary" id="todo-show-completed">Completed</button>
+                <button type="button" class="text-secondary" id="todo-show-all">All</button>
+                <button type="button" class="text-secondary" id="todo-show-active">Active</button>
+                <button type="button" class="text-secondary" id="todo-show-completed">Completed</button>
             </div>
         </div>
         <!-- Optional JavaScript -->
@@ -35,9 +35,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-{#        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>#}
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
-    </main>
+        {#        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>#}
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+    </div>
 {% endblock content %}

@@ -1,28 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Sign In</h1>
+    <h1 class="todo-form-header text-center">Sign In</h1>
     <form action="" method="post" novalidate>
+        <div class="justify-content-center">
         {{ form.hidden_tag() }}
-        <p>
+        <div class="form-group">
             {{ form.email.label }} <br>
             {{ form.email(size=32) }} <br>
             {% for error in form.email.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
-        </p>
-        <p>
+        </div>
+        <div class="form-group">
             {{ form.password.label }}<br>
             {{ form.password(size=32) }} <br>
             {% for error in form.password.errors %}
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
-        </p>
-        <p>{{ form.remember() }} {{ form.remember.label }}</p>
-        <p>{{ form.submit() }}</p>
-        <p>New User? <a href="{{ url_for('register') }}">Click here to register!</a></p>
-        <p>
-            Forgot Your Password?
+        </div>
+        <div class="form-group form-check">{{ form.remember() }} {{ form.remember.label }}</div>
+        <div>{{ form.submit() }}</div>
+        <div>New User? <a href="{{ url_for('register') }}">Click here to register!</a></div>
+        <div>Forgot Your Password?
             <a href="{{ url_for('reset_password_request') }}">Click here to reset it!</a>
-        </p>
+        </div>
+        </div>
     </form>
 {% endblock content %}

@@ -1,9 +1,28 @@
 body {
     font-size: 18px;
     alignment: center;
+    align-content: center;
     background: #0b0c10;
     font-family: Cambria;
 }
+
+/*********** NAVBAR ************************************/
+/* navbar brand icon styling */
+.navbar .navbar-brand i {
+    color: #66fcf1;
+}
+
+/* navbar links styling */
+#navbarNavAltMarkup a {
+    color: #66fcf1;
+    /*outline: #66fcf1 1px solid;*/
+}
+
+/* navbar toggler color */
+.navbar-toggler i {
+    color: #66fcf1;
+}
+
 
 form p, h1 {
     color: white;
@@ -12,13 +31,6 @@ form p, h1 {
 p {
     color: white;
 }
-/* set width for main div */
-.todo-main {
-    /*width: 100%;*/
-    max-width: 540px;
-    font-family: inherit;
-    /*margin-top: 20px;*/
-}
 
 .site-header {
     font-family: inherit;
@@ -26,41 +38,52 @@ p {
     color: #45a29e;
 }
 
-.navbar {
-    color:inherit;
+/*********** MAIN - HOME ************************************/
+/* set width for main div */
+.todo-main {
+    max-width: 540px;
+    font-family: inherit;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
 
+.todo-form-header {
+    padding:8px;
+    color: #66fcf1;
+    font-family: inherit;
+    font-size: calc(40px + (60 - 40) * ((100vw - 300px) / (1600 - 300)));
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 400;
 }
 
 /* header and input prompt div styling */
 .todo-main .todo-header{
     padding:8px;
-    margin-top: 100px;
-    color: #45a29e;
-    opacity: 50%;
+    color: #66fcf1;
     font-family: inherit;
     font-size: calc(50px + (80 - 50) * ((100vw - 300px) / (1600 - 300)));
-    /*font-size: 80px;*/
     font-style: normal;
     font-variant: small-caps;
     font-weight: 400;
-    /*line-height: 80px;*/
 }
 
 .todo-main .todo-input {
     width: 100%;
     line-height: 32px;
-    border: #c5c6c7 1px solid;
+    border: #45a29e 1px solid;
     border-radius: 4px;
     padding: 8px;
     margin: 0;
-    color: #66fcf1;
+    /*color: #66fcf1;*/
+    color: white;
     background: #0b0c10;
     font-family: inherit;
 }
 
 .todo-main .todo-input:focus {
     outline: 0 solid transparent;
-    border: #c5c6c7 1px solid;
+    border: #45a29e 1px solid;
     padding: 8px;
     border-radius: 4px;
 }
@@ -68,12 +91,13 @@ p {
 .todo-task {
     background: #0b0c10;
     color: white;
-    border-bottom: #66fcf1 1px solid;
+    border-bottom: #45a29e 1px solid;
+    border-radius: 4px;
     font-family: inherit;
 }
 
 .fa, .fas {
-    color: white;
+    color: #66fcf1;
 }
 /* Label, text input, and paragraph text, and date */
 
@@ -166,3 +190,7 @@ p {
     color: #66fcf1;
 }
 
+/*********** LOGIN FORMS ************************************/
+form {
+    align-content: center;
+}

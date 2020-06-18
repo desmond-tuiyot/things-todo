@@ -82,12 +82,15 @@ todo_task_list.on("click", ".todo-task .todo-checkbox", function(){
         $(this).parent().find(".todo-text").addClass("text-secondary todo-done");
         taskParent.addClass("list-group-item-light todo-completed").removeClass("todo-active");
         editTasks(taskParent.attr("id"), true);
+        // taskParent.find("i.fa-edit").css("color", "#45a29e")
+        // taskParent.find("i.fa-minus-circle").css("color", "#45a29e")
     }else {
         $(this).parent().find(".todo-text").removeClass("text-secondary todo-done");
         taskParent.addClass("todo-active").removeClass("list-group-item-light todo-completed");
         editTasks(taskParent.attr("id"), false);
+        // taskParent.find("i.fa-edit").addClass("icons-when-unchecked")
+        // taskParent.find("i.fa-minus-circle").addClass("icons-when-unchecked")
     }
-
 });
 
 // function to edit tasks
